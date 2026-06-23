@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Engineer · DevOps · PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* === RESET & VARIABLES === */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --bg-elevated: #1a1a1a;
+  --amber: #d4a04a;
+  --amber-dim: #b8862e;
+  --amber-glow: rgba(212,160,74,0.15);
+  --text: #e8e4dc;
+  --text-dim: #8a8578;
+  --text-muted: #5a5650;
+  --border: #2a2724;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--amber); color: var(--bg); }
+
+/* === NOISE OVERLAY === */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* === NAVIGATION === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 3rem;
+  z-index: 100;
+  background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+  transition: background 0.4s;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.nav-logo span { color: var(--amber); }
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--amber);
+  transition: width 0.4s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--amber); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* === HERO === */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, var(--amber-glow) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulseGlow 8s ease-in-out infinite;
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 1rem;
+  opacity: 0; animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+}
+.hero-tag::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--amber);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  max-width: 900px;
+  opacity: 0; animation: fadeUp 0.8s var(--ease) 0.4s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 400;
+}
+.hero-sub {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 2.5rem;
+  max-width: 500px;
+  line-height: 1.8;
+  opacity: 0; animation: fadeUp 0.8s var(--ease) 0.6s forwards;
+}
+.hero-cta {
+  margin-top: 3rem;
+  display: flex; gap: 1.5rem;
+  opacity: 0; animation: fadeUp 0.8s var(--ease) 0.8s forwards;
+}
+.btn {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--amber);
+  transform: translateX(-101%);
+  transition: transform 0.4s var(--ease);
+}
+.btn:hover { border-color: var(--amber); color: var(--bg); }
+.btn:hover::before { transform: translateX(0); }
+.btn span { position: relative; z-index: 1; }
+.btn-ghost { border-color: transparent; }
+.btn-ghost:hover { border-color: transparent; color: var(--amber); background: transparent; }
+.btn-ghost::before { display: none; }
+
+/* === SKILL CARDS === */
+.skills-section {
+  padding: 6rem 3rem 8rem;
+  position: relative;
+}
+.skills-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 3rem; right: 3rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+.section-count {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s var(--ease);
+  cursor: default;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+.skill-card:hover { border-color: var(--amber-dim); transform: translateY(-4px); }
+.skill-card:hover::before { transform: scaleX(1); }
+.card-icon {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 2rem;
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  color: var(--amber);
+  transition: all 0.4s;
+}
+.skill-card:hover .card-icon {
+  background: var(--amber-glow);
+  border-color: var(--amber-dim);
+}
+.card-role {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.card-tags {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  transition: all 0.3s;
+}
+.skill-card:hover .tag { border-color: var(--amber-dim); color: var(--text); }
+.card-metric {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.metric-item { text-align: center; }
+.metric-val {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+.metric-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* === TIMELINE PAGE === */
+.timeline-page {
+  min-height: 100vh;
+  padding: 8rem 3rem 4rem;
+}
+.timeline-header {
+  margin-bottom: 4rem;
+}
+.timeline-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-top: 0.5rem;
+}
+.timeline-header h1 em { font-style: italic; color: var(--amber); font-weight: 400; }
+.timeline-header p {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+/* Vertical timeline */
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 60px;
+}
+.timeline-line {
+  position: absolute;
+  left: 29px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--amber), var(--border) 30%, var(--border) 70%, transparent);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s var(--ease);
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.timeline-dot {
+  position: absolute;
+  left: -39px; top: 8px;
+  width: 18px; height: 18px;
+  border: 2px solid var(--amber);
+  background: var(--bg);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.4s;
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--amber);
+  box-shadow: 0 0 20px var(--amber-glow);
+}
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+  margin-bottom: 0.75rem;
+}
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  transition: all 0.4s var(--ease);
+}
+.timeline-item:hover .timeline-card {
+  border-color: var(--amber-dim);
+  transform: translateX(8px);
+}
+.timeline-role {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.timeline-skills {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+}
+.timeline-skills .tag {
+  font-size: 0.55rem;
+  padding: 0.25rem 0.6rem;
+}
+
+/* Category badges */
+.cat-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  margin-left: 0.75rem;
+  vertical-align: middle;
+}
+.cat-swe { background: rgba(212,160,74,0.15); color: var(--amber); }
+.cat-devops { background: rgba(74,160,212,0.15); color: #4aa0d4; }
+.cat-pm { background: rgba(160,212,74,0.15); color: #a0d44a; }
+
+/* === ANIMATIONS === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s var(--ease);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Page transitions */
+.page-enter { animation: fadeUp 0.6s var(--ease) forwards; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--amber-dim); }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .hero { padding: 7rem 1.5rem 3rem; }
+  .skills-section { padding: 4rem 1.5rem 6rem; }
+  .skills-section::before { left: 1.5rem; right: 1.5rem; }
+  .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .timeline-page { padding: 7rem 1.5rem 3rem; }
+  .timeline-container { padding-left: 40px; }
+  .timeline-line { left: 9px; }
+  .timeline-dot { left: -39px; }
+}
+@media (max-width: 600px) {
+  .nav-links a { font-size: 0.65rem; letter-spacing: 0.08em; }
+  .hero-title { font-size: clamp(2.2rem, 10vw, 4rem); }
+  .hero-cta { flex-direction: column; }
+  .btn { text-align: center; }
+  .card-metric { flex-wrap: wrap; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-logo">port<span>.</span>folio</div>
+  <div class="nav-links">
+    <a href="#" class="active" data-page="landing">Home</a>
+    <a href="#" data-page="timeline">Storymap</a>
+  </div>
+</nav>
+
+<!-- LANDING PAGE -->
+<main id="page-landing">
+  <section class="hero">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-title">Building at the<br>intersection of<br><em>code &amp; craft</em></h1>
+    <p class="hero-sub">Software engineer, DevOps practitioner, and product manager — bridging the gap between what's built, how it ships, and why it matters.</p>
+    <div class="hero-cta">
+      <button class="btn" onclick="navigateTo('timeline')"><span>View Storymap</span></button>
+      <button class="btn btn-ghost" onclick="document.querySelector('.skills-section').scrollIntoView({behavior:'smooth'})"><span>Explore Skills</span></button>
+    </div>
+  </section>
+
+  <section class="skills-section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Core Competencies</div>
+        <h2 class="section-title">Three disciplines,<br>one mindset</h2>
+      </div>
+      <div class="section-count">03 domains</div>
+    </div>
+
+    <div class="skills-grid">
+      <!-- SWE Card -->
+      <div class="skill-card fade-in">
+        <div class="card-icon">&lt;/&gt;</div>
+        <div class="card-role">Role 01</div>
+        <h3 class="card-title">Software Engineer</h3>
+        <p class="card-desc">Designing and building scalable systems with clean architecture, thoughtful APIs, and performance-driven code across the full stack.</p>
+        <div class="card-tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">Go</span>
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">GraphQL</span>
+          <span class="tag">System Design</span>
+        </div>
+        <div class="card-metric">
+          <div class="metric-item">
+            <div class="metric-val">8+</div>
+            <div class="metric-label">Years</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">40+</div>
+            <div class="metric-label">Projects</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">12M</div>
+            <div class="metric-label">Users Served</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps Card -->
+      <div class="skill-card fade-in">
+        <div class="card-icon">&gt;_</div>
+        <div class="card-role">Role 02</div>
+        <h3 class="card-title">DevOps Engineer</h3>
+        <p class="card-desc">Architecting reliable deployment pipelines, infrastructure as code, and observability stacks that keep systems running at scale.</p>
+        <div class="card-tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Docker</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">GitOps</span>
+          <span class="tag">Linux</span>
+        </div>
+        <div class="card-metric">
+          <div class="metric-item">
+            <div class="metric-val">99.9%</div>
+            <div class="metric-label">Uptime</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">200+</div>
+            <div class="metric-label">Deploys/wk</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">60%</div>
+            <div class="metric-label">Cost Saved</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PM Card -->
+      <div class="skill-card fade-in">
+        <div class="card-icon">PM</div>
+        <div class="card-role">Role 03</div>
+        <h3 class="card-title">Product Manager</h3>
+        <p class="card-desc">Translating user needs into product strategy, prioritizing ruthlessly, and aligning cross-functional teams around measurable outcomes.</p>
+        <div class="card-tags">
+          <span class="tag">Strategy</span>
+          <span class="tag">Roadmapping</span>
+          <span class="tag">User Research</span>
+          <span class="tag">Agile</span>
+          <span class="tag">OKRs</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">Stakeholders</span>
+          <span class="tag">A/B Testing</span>
+        </div>
+        <div class="card-metric">
+          <div class="metric-item">
+            <div class="metric-val">15+</div>
+            <div class="metric-label">Products</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">3</div>
+            <div class="metric-label">0→1 Launches</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">$4M</div>
+            <div class="metric-label">Revenue Led</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- TIMELINE PAGE -->
+<main id="page-timeline" style="display:none;">
+  <section class="timeline-page">
+    <div class="timeline-header">
+      <div class="section-label">Skill Storymap</div>
+      <h1>The journey<br>so <em>far</em></h1>
+      <p>A timeline of roles, milestones, and the skills that defined each chapter. Every era built the foundation for the next.</p>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2025 — Present</div>
+        <div class="timeline-card">
+          <div class="timeline-role">Staff Engineer & Tech Lead <span class="cat-badge cat-swe">SWE</span><span class="cat-badge cat-pm">PM</span></div>
+          <h3 class="timeline-title">Platform Architecture & Product Strategy</h3>
+          <p class="timeline-desc">Leading platform engineering for a multi-tenant SaaS product. Own the technical roadmap while coordinating with product and design on quarterly OKRs. Migrated monolith to event-driven microservices serving 12M+ users.</p>
+          <div class="timeline-skills">
+            <span class="tag">Go</span><span class="tag">Kafka</span><span class="tag">K8s</span><span class="tag">System Design</span><span class="tag">Roadmapping</span><span class="tag">Team Leadership</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023 — 2025</div>
+        <div class="timeline-card">
+          <div class="timeline-role">Senior DevOps Engineer <span class="cat-badge cat-devops">DevOps</span></div>
+          <h3 class="timeline-title">Infrastructure at Scale</h3>
+          <p class="timeline-desc">Built and operated Kubernetes clusters across 3 AWS regions. Implemented GitOps workflows with ArgoCD, reducing deploy times by 70%. Established SLO-based observability with Prometheus, Grafana, and OpenTelemetry.</p>
+          <div class="timeline-skills">
+            <span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">ArgoCD</span><span class="tag">Prometheus</span><span class="tag">OpenTelemetry</span><span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2021 — 2023</div>
+        <div class="timeline-card">
+          <div class="timeline-role">Full-Stack Engineer <span class="cat-badge cat-swe">SWE</span></div>
+          <h3 class="timeline-title">Product Engineering & Growth</h3>
+          <p class="timeline-desc">Built customer-facing features across React frontends and Node.js APIs. Led A/B testing initiatives that improved conversion by 23%. Designed GraphQL schema serving 50+ client queries with sub-100ms P99 latency.</p>
+          <div class="timeline-skills">
+            <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">GraphQL</span><span class="tag">PostgreSQL</span><span class="tag">A/B Testing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2019 — 2021</div>
+        <div class="timeline-card">
+          <div class="timeline-role">Product Manager <span class="cat-badge cat-pm">PM</span></div>
+          <h3 class="timeline-title">From Building to Shaping</h3>
+          <p class="timeline-desc">Transitioned into product management for the developer tools team. Conducted user research across 80+ customers. Defined and shipped a developer SDK that became the company's third-largest acquisition channel.</p>
+          <div class="timeline-skills">
+            <span class="tag">User Research</span><span class="tag">OKRs</span><span class="tag">Analytics</span><span class="tag">Agile</span><span class="tag">Stakeholder Mgmt</span><span class="tag">SDK Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2017 — 2019</div>
+        <div class="timeline-card">
+          <div class="timeline-role">Junior Software Engineer <span class="cat-badge cat-swe">SWE</span></div>
+          <h3 class="timeline-title">Foundations & First Systems</h3>
+          <p class="timeline-desc">Started as a backend engineer building REST APIs and data pipelines. Learned production operations firsthand — on-call rotations, incident response, and the art of writing runbooks at 2 AM.</p>
+          <div class="timeline-skills">
+            <span class="tag">Python</span><span class="tag">Django</span><span class="tag">REST APIs</span><span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2015 — 2017</div>
+        <div class="timeline-card">
+          <div class="timeline-role">CS Student & Open Source <span class="cat-badge cat-swe">SWE</span></div>
+          <h3 class="timeline-title">The Spark</h3>
+          <p class="timeline-desc">Computer Science degree with a focus on distributed systems and human-computer interaction. Contributed to open-source CLI tools and built side projects that taught more than any course ever could.</p>
+          <div class="timeline-skills">
+            <span class="tag">Algorithms</span><span class="tag">Distributed Systems</span><span class="tag">Open Source</span><span class="tag">Git</span><span class="tag">Java</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+// === PAGE ROUTING ===
+function navigateTo(page) {
+  document.querySelectorAll('main').forEach(m => m.style.display = 'none');
+  const target = document.getElementById('page-' + page);
+  target.style.display = 'block';
+  target.classList.remove('page-enter');
+  void target.offsetWidth;
+  target.classList.add('page-enter');
+  
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  if (page === 'timeline') {
+    setTimeout(observeTimelineItems, 100);
+  } else {
+    setTimeout(observeFadeIns, 100);
+  }
+}
+
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo(a.dataset.page);
+  });
+});
+
+// === SCROLL ANIMATIONS ===
+function observeFadeIns() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 150);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+
+function observeTimelineItems() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  
+  document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    el.classList.remove('visible');
+    el.style.transitionDelay = (i * 0.05) + 's';
+    observer.observe(el);
+  });
+}
+
+// Init
+observeFadeIns();
+
+// === PARALLAX GLOW ===
+document.addEventListener('mousemove', (e) => {
+  const hero = document.querySelector('.hero::before');
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.querySelector('.hero').style.setProperty('--mx', x + 'px');
+  document.querySelector('.hero').style.setProperty('--my', y + 'px');
+});
+</script>
+</body>
+</html>
