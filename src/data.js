@@ -1,3 +1,6 @@
+import excelReportImage from "../assets/images/excel-report.jpeg";
+import excelTimelineImage from "../assets/images/timeline.png";
+
 export const skillCards = [
   {
     icon: "</>",
@@ -100,29 +103,53 @@ export const timelineItems = [
   {
     year: "9/2017 — 12/2023",
     company: "mgm technology partners Vietnam",
-    role: "Software Engineer & DevOps Practitioner",
-    badges: [{ label: "DevOps", variant: "devops" }],
+    badges: [{ label: "Software Engineer", variant: "developer" }, { label: "DevOps", variant: "devops" }, { label: "Scrum Master", variant: "scrum" }],
     title: "Infrastructure at Scale",
     description: [
       "Where I joined as software engineer who mainly worked in big enterprise projects. Those big enterprise projects are usually monolithic, multi-tiered, and multi-module. I learned to work with big codebase, and how to maintain it. The codebase is usually built with Java, Spring(Boot), underneath is Oracle database, and deployed in Kubernetes clusters. I also learned to work with big teams, and how to communicate effectively with them. Those big enterprise projects share the common characteristics: deep inheritance, complex business logic, performance should be optimized to the furthers, but the ACID policies must always be guaranteed, performance is not the first priority, but the correctness of the business logic is the first priority.",
       "Beside, I also worked in some smaller projects, which require realtime behavior, implemented by either Java WebFlux, WebSocket, SSE, polling... in which I realized the importance of reactive programming, the pros and cons of each approach, and how to choose the right one for the right problem.",
       "Apart from software engineering, I also worked as DevOps practitioner, where I learned to build Jenkins CI/CD pipelines, and deploy the applications to Kubernetes clusters. I also learned to monitor the applications, and troubleshoot the issues. The engineering team should be responsible for the whole lifecycle of the application, from development to production, and I learned to do that. Of course the important data-reated decision in PROD are performed by dedicated DBA team.",
       "Established SLO-based observability with Prometheus, Grafana, and OpenTelemetry.",
+      "Along the way, I also has two years with the role of Scrum Master (when still doing engineering), where I learned to facilitate the team, and help them to improve their processes. I also learned to work with Product Owners, and help them to prioritize the backlog, and make sure that the team is working on the right things.",
     ],
     tags: ["Java", "Spring Boot", "Jenkins", "Kubernetes", "Prometheus", "Grafana"],
   },
   {
     year: "1/2024 — 4/2025",
-    company: "Lattice Growth Labs",
-    role: "Full-Stack Engineer",
-    badges: [{ label: "SWE", variant: "swe" }],
-    title: "Product Engineering & Growth",
+    company: "Breaking year",
+    role: "A few months of break, then NodeJS - Cloud Native developer",
     description: [
-      "Built customer-facing features across React frontends and Node.js APIs.",
-      "Led A/B testing initiatives that improved conversion by 23%.",
-      "Designed a GraphQL schema serving 50+ client queries with sub-100ms P99 latency.",
+      "I took a few months of break to recharge and learn new technologies.",
+      "During this time, I learned about NodeJS, Cloud Native, and Serverless architectures.",
+      "I also worked on some personal projects, embracing the microservice architecture around NATS queue, deployed in Kubernetes clusters either local cluster or GCP. I learned more about TypeScript, NextJS",
     ],
-    tags: ["React", "TypeScript", "Node.js", "GraphQL", "PostgreSQL", "A/B Testing"],
+    tags: ["Node.js", "Cloud Native", "TypeScript", "Microservices", "NATS", "Kubernetes", "NextJS"],
+  },
+  {
+    year: "3/2024 — 2/2025",
+    company: "Glory Software Vietnam (GSV)",
+    role: "Scrum Master",
+    badges: [{ label: "Scrum master", variant: "SM" }, { label: "acting Project Managegr", variant: "PM" }],
+    title: "Scrum Master & Acting Project Manager",
+    description: [
+      "I worked as a Scrum Master of one team in SAF, with the role of acting Project Manager, where I learned to facilitate the team, and help them to improve their processes. To summary the responsibility, I need to ensure the team need to deliver the right things, and deliver them in the right way, also satisfy the stakeholders. My project is a production running fintech app, my task is to ensure the team works effectively with other engineering teams, QA and designers",
+      "To be able to ensure the team works effectively, I need to understand the business domain, and the technical domain. I need to understand the business requirements, and translate them into technical requirements. I also need to understand the technical constraints, and help the team to find the best solutions.",
+      {
+        type: "image",
+        src: excelTimelineImage,
+        alt: "Project tracking and reporting spreadsheet",
+        caption: "Example of the reporting and planning work that supported delivery.",
+      },
+      "I also learnt to maintain the project roadmap with timelines, and ensure the team is on track to deliver the roadmap.",
+      "I also joined in reviewing the system architecture, facilitate the other teams support on code reviewing, coding",
+      {
+        type: "image",
+        src: excelTimelineImage,
+        alt: "Project tracking and reporting spreadsheet",
+        caption: "Example of the reporting and planning work that supported delivery.",
+      },
+    ],
+    tags: ["Excel", "Report", "Scrum", "Agile", "Stakeholder Management", "Project Management", "Roadmap"],
   },
   {
     year: "2019 — 2021",

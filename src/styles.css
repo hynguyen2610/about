@@ -609,6 +609,25 @@ nav {
   margin-top: 0.8rem;
 }
 
+.timeline-media {
+  margin-top: 1rem;
+}
+
+.timeline-media-image {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.timeline-media-caption {
+  margin-top: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
 .timeline-skills .tag {
   font-size: 0.55rem;
   padding: 0.25rem 0.6rem;

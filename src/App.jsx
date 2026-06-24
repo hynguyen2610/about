@@ -76,6 +76,24 @@ function getValidBadges(badges) {
   return badges.filter((badge) => hasText(badge?.label) && hasText(badge?.variant));
 }
 
+function getDescriptionEntries(description) {
+  if (!Array.isArray(description)) return [];
+
+  return description.filter((entry) => {
+    if (hasText(entry)) return true;
+
+    if (entry && typeof entry === "object") {
+      if (entry.type === "image") {
+        return hasText(entry.src);
+      }
+
+      return hasText(entry.text);
+    }
+
+    return false;
+  });
+}
+
 function useRevealOnIntersect(selector, trigger) {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(selector));
@@ -238,7 +256,7 @@ function TimelinePage({ sortOrder, onSortChange }) {
           <div className="timeline-line" />
           {sortedTimelineItems.map((item, index) => {
             const badges = getValidBadges(item.badges);
-            const descriptionLines = getNonEmptyStrings(item.description);
+            const descriptionEntries = getDescriptionEntries(item.description);
             const tags = getNonEmptyStrings(item.tags);
             const hasRoleRow = hasText(item.role) || badges.length > 0;
             const itemKey = `${item.company ?? "timeline-item"}-${item.year ?? index}`;
@@ -260,11 +278,26 @@ function TimelinePage({ sortOrder, onSortChange }) {
                   ) : null}
                   {hasText(item.company) ? <p className="timeline-company">{item.company}</p> : null}
                   {hasText(item.title) ? <h3 className="timeline-title">{item.title}</h3> : null}
-                  {descriptionLines.length ? (
+                  {descriptionEntries.length ? (
                     <div className="timeline-desc">
-                      {descriptionLines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
+                      {descriptionEntries.map((entry, entryIndex) => {
+                        if (hasText(entry)) {
+                          return <p key={`${itemKey}-text-${entryIndex}`}>{entry}</p>;
+                        }
+
+                        if (entry.type === "image") {
+                          return (
+                            <figure key={`${itemKey}-image-${entryIndex}`} className="timeline-media">
+                              <img src={entry.src} alt={entry.alt ?? ""} className="timeline-media-image" />
+                              {hasText(entry.caption) ? (
+                                <figcaption className="timeline-media-caption">{entry.caption}</figcaption>
+                              ) : null}
+                            </figure>
+                          );
+                        }
+
+                        return <p key={`${itemKey}-textobj-${entryIndex}`}>{entry.text}</p>;
+                      })}
                     </div>
                   ) : null}
                   {tags.length ? (
