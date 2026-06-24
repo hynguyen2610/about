@@ -72,6 +72,7 @@ export const skillCards = [
 
 export const timelineItems = [
   {
+    index: 1,
     year: "5/2013 — 5/2016",
     company: "College",
     role: "Student in Software Engineering",
@@ -86,6 +87,7 @@ export const timelineItems = [
     tags: [".NET", "Winform", "SQL Server", "EF"],
   },
   {
+    index: 2,
     year: "5/2016 — 8/2017",
     company: "Viegrid JSC",
     role: "Software Developer",
@@ -101,6 +103,7 @@ export const timelineItems = [
     tags: ["Java", "Linux", "Shell Scripting"],
   },
   {
+    index: 3,
     year: "9/2017 — 12/2023",
     company: "mgm technology partners Vietnam",
     badges: [{ label: "Software Engineer", variant: "developer" }, { label: "DevOps", variant: "devops" }, { label: "Scrum Master", variant: "scrum" }],
@@ -115,6 +118,7 @@ export const timelineItems = [
     tags: ["Java", "Spring Boot", "Jenkins", "Kubernetes", "Prometheus", "Grafana"],
   },
   {
+    index: 4,
     year: "1/2024 — 4/2025",
     company: "Breaking year",
     role: "A few months of break, then NodeJS - Cloud Native developer",
@@ -126,6 +130,7 @@ export const timelineItems = [
     tags: ["Node.js", "Cloud Native", "TypeScript", "Microservices", "NATS", "Kubernetes", "NextJS"],
   },
   {
+    index: 5,
     year: "3/2024 — 2/2025",
     company: "Glory Software Vietnam (GSV)",
     role: "Scrum Master",
@@ -153,6 +158,7 @@ export const timelineItems = [
     tags: ["Excel", "Report", "Scrum", "Agile", "Stakeholder Management", "Project Management", "Roadmap"],
   },
   {
+    index: 6,
     year: "3/2025 — Now",
     company: "Develop Riverbank app",
     role: "Builder",

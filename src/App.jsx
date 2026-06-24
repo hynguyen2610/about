@@ -44,43 +44,18 @@ function useTheme() {
   return [theme, toggleTheme];
 }
 
-function parseTimelineRange(rangeLabel) {
-  const [startRaw = "", endRaw = ""] = rangeLabel.split("—").map((part) => part.trim());
-
-  const parsePoint = (value, fallbackMonth) => {
-    if (!value) return Number.NEGATIVE_INFINITY;
-    if (value.toLowerCase() === "present") return Number.POSITIVE_INFINITY;
-
-    const [monthPart, yearPart] = value.includes("/") ? value.split("/") : [String(fallbackMonth), value];
-    const month = Number(monthPart);
-    const year = Number(yearPart);
-
-    if (!Number.isFinite(year)) return Number.NEGATIVE_INFINITY;
-    return year * 100 + (Number.isFinite(month) ? month : fallbackMonth);
-  };
-
-  return {
-    start: parsePoint(startRaw, 1),
-    end: parsePoint(endRaw, 12),
-  };
-}
-
 function sortTimelineItems(items, sortOrder) {
   const direction = sortOrder === "oldest" ? 1 : -1;
 
   return [...items].sort((left, right) => {
-    const leftRange = parseTimelineRange(left.year);
-    const rightRange = parseTimelineRange(right.year);
+    const leftIndex = Number.isFinite(left.index) ? left.index : Number.MAX_SAFE_INTEGER;
+    const rightIndex = Number.isFinite(right.index) ? right.index : Number.MAX_SAFE_INTEGER;
 
-    if (leftRange.end !== rightRange.end) {
-      return (leftRange.end - rightRange.end) * direction;
+    if (leftIndex !== rightIndex) {
+      return (leftIndex - rightIndex) * direction;
     }
 
-    if (leftRange.start !== rightRange.start) {
-      return (leftRange.start - rightRange.start) * direction;
-    }
-
-    return left.company.localeCompare(right.company) * direction;
+    return (left.company ?? "").localeCompare(right.company ?? "") * direction;
   });
 }
 
