@@ -450,6 +450,10 @@ nav {
 }
 
 .timeline-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
   margin-bottom: 4rem;
 }
 
@@ -474,6 +478,38 @@ nav {
   margin-top: 1rem;
   max-width: 500px;
   line-height: 1.7;
+}
+
+.timeline-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.timeline-sort-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+
+.timeline-sort-btn:hover {
+  color: var(--text);
+}
+
+.timeline-sort-btn.active {
+  background: rgba(212, 160, 74, 0.14);
+  color: var(--amber);
+  box-shadow: inset 0 0 0 1px rgba(212, 160, 74, 0.2);
 }
 
 .timeline-container {
@@ -688,6 +724,11 @@ nav {
     padding: 7rem 1.5rem 3rem;
   }
 
+  .timeline-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .timeline-container {
     padding-left: 40px;
   }
@@ -718,5 +759,14 @@ nav {
   .card-metric {
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  .timeline-sort {
+    width: 100%;
+  }
+
+  .timeline-sort-btn {
+    flex: 1;
+    padding-inline: 0.8rem;
   }
 }

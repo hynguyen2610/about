@@ -22,7 +22,47 @@ function useHashPage() {
   return [page, navigate];
 }
 
-function useRevealOnIntersect(selector, page) {
+function parseTimelineRange(rangeLabel) {
+  const [startRaw = "", endRaw = ""] = rangeLabel.split("—").map((part) => part.trim());
+
+  const parsePoint = (value, fallbackMonth) => {
+    if (!value) return Number.NEGATIVE_INFINITY;
+    if (value.toLowerCase() === "present") return Number.POSITIVE_INFINITY;
+
+    const [monthPart, yearPart] = value.includes("/") ? value.split("/") : [String(fallbackMonth), value];
+    const month = Number(monthPart);
+    const year = Number(yearPart);
+
+    if (!Number.isFinite(year)) return Number.NEGATIVE_INFINITY;
+    return year * 100 + (Number.isFinite(month) ? month : fallbackMonth);
+  };
+
+  return {
+    start: parsePoint(startRaw, 1),
+    end: parsePoint(endRaw, 12),
+  };
+}
+
+function sortTimelineItems(items, sortOrder) {
+  const direction = sortOrder === "oldest" ? 1 : -1;
+
+  return [...items].sort((left, right) => {
+    const leftRange = parseTimelineRange(left.year);
+    const rightRange = parseTimelineRange(right.year);
+
+    if (leftRange.end !== rightRange.end) {
+      return (leftRange.end - rightRange.end) * direction;
+    }
+
+    if (leftRange.start !== rightRange.start) {
+      return (leftRange.start - rightRange.start) * direction;
+    }
+
+    return left.company.localeCompare(right.company) * direction;
+  });
+}
+
+function useRevealOnIntersect(selector, trigger) {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(selector));
     if (!elements.length) return undefined;
@@ -49,7 +89,7 @@ function useRevealOnIntersect(selector, page) {
     });
 
     return () => observer.disconnect();
-  }, [selector, page]);
+  }, [selector, trigger]);
 }
 
 function Nav({ page }) {
@@ -142,27 +182,48 @@ function LandingPage({ onNavigate, skillsRef, heroRef }) {
   );
 }
 
-function TimelinePage() {
+function TimelinePage({ sortOrder, onSortChange }) {
+  const sortedTimelineItems = sortTimelineItems(timelineItems, sortOrder);
+
   return (
     <main className="page-shell page-enter">
       <section className="timeline-page">
         <div className="timeline-header">
-          <div className="section-label">Skill Storymap</div>
-          <h1>
-            The journey
-            <br />
-            so <em>far</em>
-          </h1>
-          <p>
-            A timeline of roles, milestones, and the skills that defined each chapter. Every era
-            built the foundation for the next.
-          </p>
+          <div>
+            <div className="section-label">Skill Storymap</div>
+            <h1>
+              The journey
+              <br />
+              so <em>far</em>
+            </h1>
+            <p>
+              A timeline of roles, milestones, and the skills that defined each chapter. Every era
+              built the foundation for the next.
+            </p>
+          </div>
+
+          <div className="timeline-sort" aria-label="Sort timeline">
+            <button
+              type="button"
+              className={`timeline-sort-btn ${sortOrder === "newest" ? "active" : ""}`}
+              onClick={() => onSortChange("newest")}
+            >
+              Newest first
+            </button>
+            <button
+              type="button"
+              className={`timeline-sort-btn ${sortOrder === "oldest" ? "active" : ""}`}
+              onClick={() => onSortChange("oldest")}
+            >
+              Oldest first
+            </button>
+          </div>
         </div>
 
         <div className="timeline-container">
           <div className="timeline-line" />
-          {timelineItems.map((item) => (
-            <article key={item.year} className="timeline-item">
+          {sortedTimelineItems.map((item) => (
+            <article key={`${item.company}-${item.year}`} className="timeline-item">
               <div className="timeline-dot" />
               <div className="timeline-year">{item.year}</div>
               <div className="timeline-card">
@@ -195,11 +256,12 @@ function TimelinePage() {
 
 export default function App() {
   const [page, navigate] = useHashPage();
+  const [timelineSort, setTimelineSort] = useState("newest");
   const skillsRef = useRef(null);
   const heroRef = useRef(null);
 
   useRevealOnIntersect(".fade-in", page);
-  useRevealOnIntersect(".timeline-item", page);
+  useRevealOnIntersect(".timeline-item", `${page}-${timelineSort}`);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -223,7 +285,7 @@ export default function App() {
     <div className="app-shell">
       <Nav page={page} />
       {page === "timeline" ? (
-        <TimelinePage />
+        <TimelinePage sortOrder={timelineSort} onSortChange={setTimelineSort} />
       ) : (
         <LandingPage onNavigate={navigate} skillsRef={skillsRef} heroRef={heroRef} />
       )}
