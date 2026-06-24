@@ -68,48 +68,60 @@ export const skillCards = [
 ];
 
 export const timelineItems = [
-    {
+  {
     year: "5/2013 — 5/2016",
     company: "College",
     role: "Student in Software Engineering",
-    badges: [
-      { label: "SWE", variant: "swe" },
+    badges: [{ label: "SWE", variant: "swe" }],
+    title: "Early Career",
+    description: [
+      "Early stage of career, as a student, I learnt to build SME software systems",
+      "Worked on SME products like warehouse management and gym course management, they share common shapes: monolithic, sometime distributed using RMI or RPC, multi-tiered, MVC embraced. They also covered business cases in unit tests",
+      "In the collegeg, meanwhile I started to learn about Data Structure and Algorithms, OOP, Design Patterns, and Software Engineering principles, also building the system desiging skills, including database design and system architecture.",
+      "Kind of projects: Desktop (Winform), Web (ASP.NET), EF, SQL Server"
     ],
-    title: "Software Development & Early Career",
-    description:
-      "Developed SME softwares such as Gym course management system",
-    tags: [".NET", "EntityFramework"],
+    tags: [".NET", "Winform", "SQL Server", "EF"],
   },
   {
     year: "5/2016 — 8/2017",
     company: "Viegrid JSC",
     role: "Software Developer",
-    badges: [
-      { label: "SWE", variant: "swe" },
-    ],
+    badges: [{ label: "SWE", variant: "swe" }],
     title: "Software Development & Early Career",
-    description:
-      "Developed sub-modules of monolith firewall project, including packet filtering, logging",
-    tags: ["Java", "Linux"],
+    description: [
+      "My first company, where I joined as intern student and become a permanent employee.",
+      "Main project I worked in is a big firewall project. In there I mostly eveloped sub-modules of a monolithic firewall product.",
+      "Worked on packet filtering and logging capabilities modules - basically wrapper of Linux commands.",
+      "I also worked as high quality QA engineer, spot out several bugs in the product. After a few years, I looked back and  realized that the mindset of software quality has grown in mine since this time",
+      "Skills: Java Core, Linux, Shell Scripting, Quality Control"
+    ],
+    tags: ["Java", "Linux", "Shell Scripting"],
   },
   {
-    year: "9/2017 — 2025",
-    company: "Atlas Cloud Systems",
-    role: "Senior DevOps Engineer",
+    year: "9/2017 — 12/2023",
+    company: "mgm technology partners Vietnam",
+    role: "Software Engineer & DevOps Practitioner",
     badges: [{ label: "DevOps", variant: "devops" }],
     title: "Infrastructure at Scale",
-    description:
-      "Built and operated Kubernetes clusters across 3 AWS regions. Implemented GitOps workflows with ArgoCD, reducing deploy times by 70%. Established SLO-based observability with Prometheus, Grafana, and OpenTelemetry.",
-    tags: ["Terraform", "AWS", "ArgoCD", "Prometheus", "OpenTelemetry", "Python"],
+    description: [
+      "Where I joined as software engineer who mainly worked in big enterprise projects. Those big enterprise projects are usually monolithic, multi-tiered, and multi-module. I learned to work with big codebase, and how to maintain it. The codebase is usually built with Java, Spring(Boot), underneath is Oracle database, and deployed in Kubernetes clusters. I also learned to work with big teams, and how to communicate effectively with them. Those big enterprise projects share the common characteristics: deep inheritance, complex business logic, performance should be optimized to the furthers, but the ACID policies must always be guaranteed, performance is not the first priority, but the correctness of the business logic is the first priority.",
+      "Beside, I also worked in some smaller projects, which require realtime behavior, implemented by either Java WebFlux, WebSocket, SSE, polling... in which I realized the importance of reactive programming, the pros and cons of each approach, and how to choose the right one for the right problem.",
+      "Apart from software engineering, I also worked as DevOps practitioner, where I learned to build Jenkins CI/CD pipelines, and deploy the applications to Kubernetes clusters. I also learned to monitor the applications, and troubleshoot the issues. The engineering team should be responsible for the whole lifecycle of the application, from development to production, and I learned to do that. Of course the important data-reated decision in PROD are performed by dedicated DBA team.",
+      "Established SLO-based observability with Prometheus, Grafana, and OpenTelemetry.",
+    ],
+    tags: ["Java", "Spring Boot", "Jenkins", "Kubernetes", "Prometheus", "Grafana"],
   },
   {
-    year: "2021 — 2023",
+    year: "1/2024 — 4/2025",
     company: "Lattice Growth Labs",
     role: "Full-Stack Engineer",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "Product Engineering & Growth",
-    description:
-      "Built customer-facing features across React frontends and Node.js APIs. Led A/B testing initiatives that improved conversion by 23%. Designed GraphQL schema serving 50+ client queries with sub-100ms P99 latency.",
+    description: [
+      "Built customer-facing features across React frontends and Node.js APIs.",
+      "Led A/B testing initiatives that improved conversion by 23%.",
+      "Designed a GraphQL schema serving 50+ client queries with sub-100ms P99 latency.",
+    ],
     tags: ["React", "TypeScript", "Node.js", "GraphQL", "PostgreSQL", "A/B Testing"],
   },
   {
@@ -118,8 +130,11 @@ export const timelineItems = [
     role: "Product Manager",
     badges: [{ label: "PM", variant: "pm" }],
     title: "From Building to Shaping",
-    description:
-      "Transitioned into product management for the developer tools team. Conducted user research across 80+ customers. Defined and shipped a developer SDK that became the company's third-largest acquisition channel.",
+    description: [
+      "Transitioned into product management for the developer tools team.",
+      "Conducted user research across 80+ customers.",
+      "Defined and shipped a developer SDK that became the company's third-largest acquisition channel.",
+    ],
     tags: ["User Research", "OKRs", "Analytics", "Agile", "Stakeholder Mgmt", "SDK Design"],
   },
   {
@@ -128,8 +143,10 @@ export const timelineItems = [
     role: "Junior Software Engineer",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "Foundations & First Systems",
-    description:
-      "Started as a backend engineer building REST APIs and data pipelines. Learned production operations firsthand — on-call rotations, incident response, and the art of writing runbooks at 2 AM.",
+    description: [
+      "Started as a backend engineer building REST APIs and data pipelines.",
+      "Learned production operations firsthand through on-call rotations, incident response, and late-night runbooks.",
+    ],
     tags: ["Python", "Django", "REST APIs", "Docker", "Linux", "CI/CD"],
   },
   {
@@ -138,8 +155,10 @@ export const timelineItems = [
     role: "CS Student & Open Source",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "The Spark",
-    description:
-      "Computer Science degree with a focus on distributed systems and human-computer interaction. Contributed to open-source CLI tools and built side projects that taught more than any course ever could.",
+    description: [
+      "Studied computer science with a focus on distributed systems and human-computer interaction.",
+      "Contributed to open-source CLI tools and built side projects that taught more than any course could.",
+    ],
     tags: ["Algorithms", "Distributed Systems", "Open Source", "Git", "Java"],
   },
 ];

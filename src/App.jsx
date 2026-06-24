@@ -237,7 +237,11 @@ function TimelinePage({ sortOrder, onSortChange }) {
                 </div>
                 <p className="timeline-company">{item.company}</p>
                 <h3 className="timeline-title">{item.title}</h3>
-                <p className="timeline-desc">{item.description}</p>
+                <div className="timeline-desc">
+                  {item.description.map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </div>
                 <div className="timeline-skills">
                   {item.tags.map((tag) => (
                     <span key={tag} className="tag">

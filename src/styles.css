@@ -605,6 +605,10 @@ nav {
   margin-bottom: 1.5rem;
 }
 
+.timeline-desc p + p {
+  margin-top: 0.8rem;
+}
+
 .timeline-skills .tag {
   font-size: 0.55rem;
   padding: 0.25rem 0.6rem;
