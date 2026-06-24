@@ -69,7 +69,8 @@ export const skillCards = [
 
 export const timelineItems = [
   {
-    year: "2025 — Present",
+    year: "2016 — 9/2017",
+    company: "Northstar Platform",
     role: "Staff Engineer & Tech Lead",
     badges: [
       { label: "SWE", variant: "swe" },
@@ -82,6 +83,7 @@ export const timelineItems = [
   },
   {
     year: "2023 — 2025",
+    company: "Atlas Cloud Systems",
     role: "Senior DevOps Engineer",
     badges: [{ label: "DevOps", variant: "devops" }],
     title: "Infrastructure at Scale",
@@ -91,6 +93,7 @@ export const timelineItems = [
   },
   {
     year: "2021 — 2023",
+    company: "Lattice Growth Labs",
     role: "Full-Stack Engineer",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "Product Engineering & Growth",
@@ -100,6 +103,7 @@ export const timelineItems = [
   },
   {
     year: "2019 — 2021",
+    company: "Forge Developer Tools",
     role: "Product Manager",
     badges: [{ label: "PM", variant: "pm" }],
     title: "From Building to Shaping",
@@ -109,6 +113,7 @@ export const timelineItems = [
   },
   {
     year: "2017 — 2019",
+    company: "Riverstack Systems",
     role: "Junior Software Engineer",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "Foundations & First Systems",
@@ -118,6 +123,7 @@ export const timelineItems = [
   },
   {
     year: "2015 — 2017",
+    company: "Open Source Community",
     role: "CS Student & Open Source",
     badges: [{ label: "SWE", variant: "swe" }],
     title: "The Spark",
