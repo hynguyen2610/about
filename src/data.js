@@ -148,44 +148,19 @@ export const timelineItems = [
         alt: "Project tracking and reporting spreadsheet",
         caption: "Example of the reporting and planning work that supported delivery.",
       },
+      'Support the development team in technical decision making, like how to ensure data correctness, how to perform load test'
     ],
     tags: ["Excel", "Report", "Scrum", "Agile", "Stakeholder Management", "Project Management", "Roadmap"],
   },
   {
-    year: "2019 — 2021",
-    company: "Forge Developer Tools",
-    role: "Product Manager",
+    year: "3/2025 — Now",
+    company: "Develop Riverbank app",
+    role: "Builder",
     badges: [{ label: "PM", variant: "pm" }],
     title: "From Building to Shaping",
     description: [
-      "Transitioned into product management for the developer tools team.",
-      "Conducted user research across 80+ customers.",
-      "Defined and shipped a developer SDK that became the company's third-largest acquisition channel.",
+      "Riverbank is a fintech system with two applications: one for end user that help to manage their finances, including performing transactions and viewing balance, one for bank admin to manage the backend operations. The system is build with tailored architecture to ensure the performance and scalability, and also ensure the security and compliance with banking regulations.",
     ],
-    tags: ["User Research", "OKRs", "Analytics", "Agile", "Stakeholder Mgmt", "SDK Design"],
-  },
-  {
-    year: "2017 — 2019",
-    company: "Riverstack Systems",
-    role: "Junior Software Engineer",
-    badges: [{ label: "SWE", variant: "swe" }],
-    title: "Foundations & First Systems",
-    description: [
-      "Started as a backend engineer building REST APIs and data pipelines.",
-      "Learned production operations firsthand through on-call rotations, incident response, and late-night runbooks.",
-    ],
-    tags: ["Python", "Django", "REST APIs", "Docker", "Linux", "CI/CD"],
-  },
-  {
-    year: "2015 — 2017",
-    company: "Open Source Community",
-    role: "CS Student & Open Source",
-    badges: [{ label: "SWE", variant: "swe" }],
-    title: "The Spark",
-    description: [
-      "Studied computer science with a focus on distributed systems and human-computer interaction.",
-      "Contributed to open-source CLI tools and built side projects that taught more than any course could.",
-    ],
-    tags: ["Algorithms", "Distributed Systems", "Open Source", "Git", "Java"],
-  },
+    tags: ["High Performance", "Concurrency", "Kafka", "Go", "Java", "Redis"],
+  }
 ];
