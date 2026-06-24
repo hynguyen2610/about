@@ -68,21 +68,32 @@ export const skillCards = [
 ];
 
 export const timelineItems = [
-  {
-    year: "2016 — 9/2017",
-    company: "Northstar Platform",
-    role: "Staff Engineer & Tech Lead",
+    {
+    year: "5/2013 — 5/2016",
+    company: "College",
+    role: "Student in Software Engineering",
     badges: [
       { label: "SWE", variant: "swe" },
-      { label: "PM", variant: "pm" },
     ],
-    title: "Platform Architecture & Product Strategy",
+    title: "Software Development & Early Career",
     description:
-      "Leading platform engineering for a multi-tenant SaaS product. Own the technical roadmap while coordinating with product and design on quarterly OKRs. Migrated monolith to event-driven microservices serving 12M+ users.",
-    tags: ["Go", "Kafka", "K8s", "System Design", "Roadmapping", "Team Leadership"],
+      "Developed SME softwares such as Gym course management system",
+    tags: [".NET", "EntityFramework"],
   },
   {
-    year: "2023 — 2025",
+    year: "5/2016 — 8/2017",
+    company: "Viegrid JSC",
+    role: "Software Developer",
+    badges: [
+      { label: "SWE", variant: "swe" },
+    ],
+    title: "Software Development & Early Career",
+    description:
+      "Developed sub-modules of monolith firewall project, including packet filtering, logging",
+    tags: ["Java", "Linux"],
+  },
+  {
+    year: "9/2017 — 2025",
     company: "Atlas Cloud Systems",
     role: "Senior DevOps Engineer",
     badges: [{ label: "DevOps", variant: "devops" }],
