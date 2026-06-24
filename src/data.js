@@ -84,6 +84,11 @@ export const timelineItems = [
       "In the collegeg, meanwhile I started to learn about Data Structure and Algorithms, OOP, Design Patterns, and Software Engineering principles, also building the system desiging skills, including database design and system architecture.",
       "Kind of projects: Desktop (Winform), Web (ASP.NET), EF, SQL Server"
     ],
+    contribution: [
+      "Built foundational business applications end to end.",
+      "Learned core software engineering practices through real product work.",
+      "Developed early strength in architecture and database modeling.",
+    ],
     tags: [".NET", "Winform", "SQL Server", "EF"],
   },
   {
@@ -100,6 +105,11 @@ export const timelineItems = [
       "I also worked as high quality QA engineer, spot out several bugs in the product. After a few years, I looked back and  realized that the mindset of software quality has grown in mine since this time",
       "Skills: Java Core, Linux, Shell Scripting, Quality Control"
     ],
+    contribution: [
+      "Delivered firewall sub-modules used in production.",
+      "Improved product quality by uncovering critical defects.",
+      "Strengthened Linux and Java fundamentals in a real delivery environment.",
+    ],
     tags: ["Java", "Linux", "Shell Scripting"],
   },
   {
@@ -115,6 +125,11 @@ export const timelineItems = [
       "Established SLO-based observability with Prometheus, Grafana, and OpenTelemetry.",
       "Along the way, I also has two years with the role of Scrum Master (when still doing engineering), where I learned to facilitate the team, and help them to improve their processes. I also learned to work with Product Owners, and help them to prioritize the backlog, and make sure that the team is working on the right things.",
     ],
+    contribution: [
+      "Delivered across large enterprise Java systems with strong correctness requirements.",
+      "Expanded ownership from coding into CI/CD, Kubernetes, and observability.",
+      "Bridged engineering and team process improvement as a practicing Scrum Master.",
+    ],
     tags: ["Java", "Spring Boot", "Jenkins", "Kubernetes", "Prometheus", "Grafana"],
   },
   {
@@ -126,6 +141,11 @@ export const timelineItems = [
       "I took a few months of break to recharge and learn new technologies.",
       "During this time, I learned about NodeJS, Cloud Native, and Serverless architectures.",
       "I also worked on some personal projects, embracing the microservice architecture around NATS queue, deployed in Kubernetes clusters either local cluster or GCP. I learned more about TypeScript, NextJS",
+    ],
+    contribution: [
+      "Used the transition period to deliberately upskill in modern cloud-native stacks.",
+      "Built hands-on experience with microservices, messaging, and TypeScript.",
+      "Prepared for a broader full-stack and platform role.",
     ],
     tags: ["Node.js", "Cloud Native", "TypeScript", "Microservices", "NATS", "Kubernetes", "NextJS"],
   },
@@ -155,6 +175,11 @@ export const timelineItems = [
       },
       'Support the development team in technical decision making, like how to ensure data correctness, how to perform load test'
     ],
+    contribution: [
+      "Coordinated delivery for a live fintech product across engineering, QA, and design.",
+      "Connected roadmap planning with technical execution and stakeholder communication.",
+      "Supported technical decisions around correctness, architecture, and load testing.",
+    ],
     tags: ["Excel", "Report", "Scrum", "Agile", "Stakeholder Management", "Project Management", "Roadmap"],
   },
   {
@@ -166,6 +191,11 @@ export const timelineItems = [
     title: "From Building to Shaping",
     description: [
       "Riverbank is a fintech system with two applications: one for end user that help to manage their finances, including performing transactions and viewing balance, one for bank admin to manage the backend operations. The system is build with tailored architecture to ensure the performance and scalability, and also ensure the security and compliance with banking regulations.",
+    ],
+    contribution: [
+      "Designed and built a fintech platform from the ground up.",
+      "Focused on concurrency, scalability, and operational resilience.",
+      "Balanced product thinking with backend architecture decisions.",
     ],
     tags: ["High Performance", "Concurrency", "Kafka", "Go", "Java", "Redis"],
   }

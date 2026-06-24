@@ -621,6 +621,13 @@ nav {
   transition: all 0.4s var(--ease);
 }
 
+.timeline-card-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(220px, 0.9fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
 .timeline-item:hover .timeline-card {
   border-color: var(--amber-dim);
   transform: translateX(8px);
@@ -672,6 +679,46 @@ nav {
   font-size: 0.65rem;
   line-height: 1.7;
   color: var(--text-dim);
+}
+
+.timeline-contribution {
+  border-left: 1px solid var(--border);
+  padding-left: 1.25rem;
+}
+
+.timeline-contribution-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.9rem;
+}
+
+.timeline-contribution-list {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.timeline-contribution-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.timeline-contribution-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 6px var(--amber-glow);
 }
 
 .timeline-skills .tag {
@@ -808,6 +855,17 @@ nav {
 
   .timeline-line {
     left: 9px;
+  }
+
+  .timeline-card-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-contribution {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: 1.25rem;
   }
 }
 

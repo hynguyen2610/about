@@ -91,6 +91,10 @@ function getDescriptionEntries(description) {
   });
 }
 
+function getContributionItems(contribution) {
+  return getNonEmptyStrings(contribution);
+}
+
 function useRevealOnIntersect(selector, trigger) {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(selector));
@@ -259,6 +263,7 @@ function TimelinePage({ sortOrder, onSortChange }) {
           {sortedTimelineItems.map((item, index) => {
             const badges = getValidBadges(item.badges);
             const descriptionEntries = getDescriptionEntries(item.description);
+            const contributionItems = getContributionItems(item.contribution);
             const tags = getNonEmptyStrings(item.tags);
             const hasRoleRow = hasText(item.role) || badges.length > 0;
             const itemKey = `${item.company ?? "timeline-item"}-${item.year ?? index}`;
@@ -268,40 +273,60 @@ function TimelinePage({ sortOrder, onSortChange }) {
                 <div className="timeline-dot" />
                 {hasText(item.year) ? <div className="timeline-year">{item.year}</div> : null}
                 <div className="timeline-card">
-                  {hasRoleRow ? (
-                    <div className="timeline-role">
-                      {hasText(item.role) ? item.role : null}
-                      {badges.map((badge) => (
-                        <span key={badge.label} className={`cat-badge cat-${badge.variant}`}>
-                          {badge.label}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                  {hasText(item.company) ? <p className="timeline-company">{item.company}</p> : null}
-                  {hasText(item.title) ? <h3 className="timeline-title">{item.title}</h3> : null}
-                  {descriptionEntries.length ? (
-                    <div className="timeline-desc">
-                      {descriptionEntries.map((entry, entryIndex) => {
-                        if (hasText(entry)) {
-                          return <p key={`${itemKey}-text-${entryIndex}`}>{entry}</p>;
-                        }
+                  <div className="timeline-card-layout">
+                    <div className="timeline-main">
+                      {hasRoleRow ? (
+                        <div className="timeline-role">
+                          {hasText(item.role) ? item.role : null}
+                          {badges.map((badge) => (
+                            <span key={badge.label} className={`cat-badge cat-${badge.variant}`}>
+                              {badge.label}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                      {hasText(item.company) ? <p className="timeline-company">{item.company}</p> : null}
+                      {hasText(item.title) ? <h3 className="timeline-title">{item.title}</h3> : null}
+                      {descriptionEntries.length ? (
+                        <div className="timeline-desc">
+                          {descriptionEntries.map((entry, entryIndex) => {
+                            if (hasText(entry)) {
+                              return <p key={`${itemKey}-text-${entryIndex}`}>{entry}</p>;
+                            }
 
-                        if (entry.type === "image") {
-                          return (
-                            <figure key={`${itemKey}-image-${entryIndex}`} className="timeline-media">
-                              <img src={entry.src} alt={entry.alt ?? ""} className="timeline-media-image" />
-                              {hasText(entry.caption) ? (
-                                <figcaption className="timeline-media-caption">{entry.caption}</figcaption>
-                              ) : null}
-                            </figure>
-                          );
-                        }
+                            if (entry.type === "image") {
+                              return (
+                                <figure key={`${itemKey}-image-${entryIndex}`} className="timeline-media">
+                                  <img
+                                    src={entry.src}
+                                    alt={entry.alt ?? ""}
+                                    className="timeline-media-image"
+                                  />
+                                  {hasText(entry.caption) ? (
+                                    <figcaption className="timeline-media-caption">
+                                      {entry.caption}
+                                    </figcaption>
+                                  ) : null}
+                                </figure>
+                              );
+                            }
 
-                        return <p key={`${itemKey}-textobj-${entryIndex}`}>{entry.text}</p>;
-                      })}
+                            return <p key={`${itemKey}-textobj-${entryIndex}`}>{entry.text}</p>;
+                          })}
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
+                    {contributionItems.length ? (
+                      <aside className="timeline-contribution">
+                        <div className="timeline-contribution-label">Contribution</div>
+                        <ul className="timeline-contribution-list">
+                          {contributionItems.map((contribution, contributionIndex) => (
+                            <li key={`${itemKey}-contribution-${contributionIndex}`}>{contribution}</li>
+                          ))}
+                        </ul>
+                      </aside>
+                    ) : null}
+                  </div>
                   {tags.length ? (
                     <div className="timeline-skills">
                       {tags.map((tag) => (
