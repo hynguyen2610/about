@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { skillCards, timelineItems } from "./data";
 
+const DEFAULT_THEME = "light";
+const THEME_STORAGE_KEY = "portfolio-theme";
+
 function useHashPage() {
   const getPage = () => {
     const hash = window.location.hash.replace("#", "");
@@ -20,6 +23,25 @@ function useHashPage() {
   };
 
   return [page, navigate];
+}
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_THEME;
+    return window.localStorage.getItem(THEME_STORAGE_KEY) ?? DEFAULT_THEME;
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  };
+
+  return [theme, toggleTheme];
 }
 
 function parseTimelineRange(rangeLabel) {
@@ -124,19 +146,24 @@ function useRevealOnIntersect(selector, trigger) {
   }, [selector, trigger]);
 }
 
-function Nav({ page }) {
+function Nav({ page, theme, onToggleTheme }) {
   return (
     <nav>
       <div className="nav-logo">
         port<span>.</span>folio
       </div>
-      <div className="nav-links">
-        <a href="#landing" className={page === "landing" ? "active" : ""}>
-          Home
-        </a>
-        <a href="#timeline" className={page === "timeline" ? "active" : ""}>
-          Storymap
-        </a>
+      <div className="nav-actions">
+        <div className="nav-links">
+          <a href="#landing" className={page === "landing" ? "active" : ""}>
+            Home
+          </a>
+          <a href="#timeline" className={page === "timeline" ? "active" : ""}>
+            Storymap
+          </a>
+        </div>
+        <button type="button" className="theme-toggle" onClick={onToggleTheme}>
+          {theme === "light" ? "Dark mode" : "Light mode"}
+        </button>
       </div>
     </nav>
   );
@@ -322,6 +349,7 @@ function TimelinePage({ sortOrder, onSortChange }) {
 export default function App() {
   const [page, navigate] = useHashPage();
   const [timelineSort, setTimelineSort] = useState("newest");
+  const [theme, toggleTheme] = useTheme();
   const skillsRef = useRef(null);
   const heroRef = useRef(null);
 
@@ -348,7 +376,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <Nav page={page} />
+      <Nav page={page} theme={theme} onToggleTheme={toggleTheme} />
       {page === "timeline" ? (
         <TimelinePage sortOrder={timelineSort} onSortChange={setTimelineSort} />
       ) : (
