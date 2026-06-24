@@ -62,6 +62,20 @@ function sortTimelineItems(items, sortOrder) {
   });
 }
 
+function hasText(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function getNonEmptyStrings(values) {
+  if (!Array.isArray(values)) return [];
+  return values.filter(hasText);
+}
+
+function getValidBadges(badges) {
+  if (!Array.isArray(badges)) return [];
+  return badges.filter((badge) => hasText(badge?.label) && hasText(badge?.variant));
+}
+
 function useRevealOnIntersect(selector, trigger) {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(selector));
@@ -222,36 +236,50 @@ function TimelinePage({ sortOrder, onSortChange }) {
 
         <div className="timeline-container">
           <div className="timeline-line" />
-          {sortedTimelineItems.map((item) => (
-            <article key={`${item.company}-${item.year}`} className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-year">{item.year}</div>
-              <div className="timeline-card">
-                <div className="timeline-role">
-                  {item.role}
-                  {item.badges.map((badge) => (
-                    <span key={badge.label} className={`cat-badge cat-${badge.variant}`}>
-                      {badge.label}
-                    </span>
-                  ))}
+          {sortedTimelineItems.map((item, index) => {
+            const badges = getValidBadges(item.badges);
+            const descriptionLines = getNonEmptyStrings(item.description);
+            const tags = getNonEmptyStrings(item.tags);
+            const hasRoleRow = hasText(item.role) || badges.length > 0;
+            const itemKey = `${item.company ?? "timeline-item"}-${item.year ?? index}`;
+
+            return (
+              <article key={itemKey} className="timeline-item">
+                <div className="timeline-dot" />
+                {hasText(item.year) ? <div className="timeline-year">{item.year}</div> : null}
+                <div className="timeline-card">
+                  {hasRoleRow ? (
+                    <div className="timeline-role">
+                      {hasText(item.role) ? item.role : null}
+                      {badges.map((badge) => (
+                        <span key={badge.label} className={`cat-badge cat-${badge.variant}`}>
+                          {badge.label}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                  {hasText(item.company) ? <p className="timeline-company">{item.company}</p> : null}
+                  {hasText(item.title) ? <h3 className="timeline-title">{item.title}</h3> : null}
+                  {descriptionLines.length ? (
+                    <div className="timeline-desc">
+                      {descriptionLines.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </div>
+                  ) : null}
+                  {tags.length ? (
+                    <div className="timeline-skills">
+                      {tags.map((tag) => (
+                        <span key={tag} className="tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
-                <p className="timeline-company">{item.company}</p>
-                <h3 className="timeline-title">{item.title}</h3>
-                <div className="timeline-desc">
-                  {item.description.map((line) => (
-                    <p key={line}>{line}</p>
-                  ))}
-                </div>
-                <div className="timeline-skills">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </section>
     </main>
